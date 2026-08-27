@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Заказ зеркал в Москве — стандартные, стандарт+ и нестандартные размеры.">
-  <title>Зеркала — Москва</title>
+  <meta name="description" content="Зазеркалье — зеркала на заказ в Москве. Зеркала на входные двери, для интерьера, шкафов и полок.">
+  <title>Зазеркалье — зеркала в Москве</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#home" aria-label="Зеркала — Москва">
+    <a class="brand" href="#home" aria-label="Зазеркалье">
       <span class="brand-mark">◇</span>
-      <span>ЗЕРКАЛА<span class="brand-dot">.</span>МОСКВА</span>
+      <span>ЗАЗЕРКАЛЬЕ</span>
     </a>
     <nav class="topnav" aria-label="Основная навигация">
       <a href="#home">Главная</a>
@@ -26,22 +26,23 @@
     <aside class="sidebar">
       <div class="side-title">Каталог</div>
       <a class="side-link active" href="#mirrors">Все зеркала</a>
-      <button class="side-link filter-btn" data-filter="standard">Стандарт</button>
-      <button class="side-link filter-btn" data-filter="standardPlus">Стандарт+</button>
-      <button class="side-link filter-btn" data-filter="custom">Нестандартные размеры</button>
+      <button class="side-link filter-btn" data-filter="door">На входную дверь</button>
+      <button class="side-link filter-btn" data-filter="interior">Для интерьера</button>
+      <button class="side-link filter-btn" data-filter="cabinet">Для шкафов и полок</button>
+      <button class="side-link filter-btn" data-filter="custom">Нестандартные</button>
       <a class="side-link" href="#order">Хочу заказать лично</a>
       <div class="side-spacer"></div>
       <a class="side-link" href="#faq">Помощь</a>
       <a class="side-link" href="#about">О нас</a>
-      <div class="moscow-note">Только Москва.<br>Заказы за пределами Москвы<br>не принимаются.</div>
+      <div class="moscow-note"><strong>Только Москва.</strong><br>Заказы за пределами города Москвы, включая Московскую область, не принимаются.</div>
     </aside>
 
     <main>
       <section id="home" class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">ЗЕРКАЛА НА ЗАКАЗ</p>
-          <h1>Зеркало,<br><em>которое подходит именно вам.</em></h1>
-          <p class="hero-text">Выберите готовый набор или укажите свои размеры. Предварительная стоимость рассчитывается до оформления заказа.</p>
+          <p class="eyebrow">ЗАЗЕРКАЛЬЕ · МОСКВА</p>
+          <h1>Зеркало,<br><em>готовое к установке.</em></h1>
+          <p class="hero-text">Зеркала на входные двери, для интерьера, шкафов и полок. Выберите готовый вариант или оставьте заявку на нестандартный размер.</p>
           <div class="hero-actions">
             <a class="button primary" href="#mirrors">Выбрать зеркало</a>
             <a class="button secondary" href="#order">Заказать лично</a>
@@ -59,35 +60,95 @@
             <p class="eyebrow">КАТАЛОГ</p>
             <h2>Выберите вариант</h2>
           </div>
-          <p class="section-muted">Стоимость пока демонстрационная.<br>Точные цены внесём после согласования с владельцем.</p>
+          <p class="section-muted">Готовые комплекты указаны<br>по актуальным данным владельца.</p>
         </div>
 
         <div class="cards" id="mirrorCards">
-          <article class="mirror-card" data-type="standard">
+          <article class="mirror-card" data-type="door">
             <div class="card-visual"><div class="mini-mirror tall"></div></div>
             <div class="card-body">
-              <span class="tag">СТАНДАРТ</span>
-              <h3>Титульное</h3>
-              <p>Готовый стандартный комплект. Размер и состав набора уточняются.</p>
-              <button class="card-button choose-btn" data-type="standard" data-name="Титульное">Выбрать</button>
+              <span class="tag">ВХОДНАЯ ДВЕРЬ · СТАНДАРТ</span>
+              <h3>Стандарт с глазком</h3>
+              <p>Размер 160 × 63 см. Комплект полностью готов и выполнен под ключ.</p>
+              <div class="card-price">8 000 ₽ <small>под ключ</small></div>
+              <button class="card-button choose-btn" data-type="doorStandard" data-name="Зеркало на входную дверь — Стандарт с глазком">Выбрать</button>
             </div>
           </article>
-          <article class="mirror-card" data-type="standardPlus">
+
+          <article class="mirror-card" data-type="door">
             <div class="card-visual"><div class="mini-mirror wide"></div></div>
             <div class="card-body">
-              <span class="tag">СТАНДАРТ+</span>
-              <h3>Титульное Plus</h3>
-              <p>Расширенный стандартный комплект с дополнительными возможностями.</p>
-              <button class="card-button choose-btn" data-type="standardPlus" data-name="Титульное Plus">Выбрать</button>
+              <span class="tag">ВХОДНАЯ ДВЕРЬ · СТАНДАРТ+</span>
+              <h3>Стандарт+ с глазком</h3>
+              <p>Размер 180 × 63 см. Полностью готовый комплект под ключ.</p>
+              <div class="card-price">9 000 ₽ <small>под ключ</small></div>
+              <button class="card-button choose-btn" data-type="doorStandardPlus" data-name="Зеркало на входную дверь — Стандарт+ с глазком">Выбрать</button>
             </div>
           </article>
-          <article class="mirror-card custom-card" data-type="custom">
+
+          <article class="mirror-card" data-type="door custom">
+            <div class="card-visual"><div class="mini-mirror custom"></div><span class="dimension-label">НЕСТАНДАРТ</span></div>
+            <div class="card-body">
+              <span class="tag">ВХОДНАЯ ДВЕРЬ · НЕСТАНДАРТ</span>
+              <h3>По вашим размерам</h3>
+              <p>Нестандартный размер. Точные ограничения и стоимость уточняются у владельца.</p>
+              <div class="card-price">По запросу</div>
+              <button class="card-button choose-btn" data-type="doorCustom" data-name="Зеркало на входную дверь — Нестандарт">Настроить</button>
+            </div>
+          </article>
+
+          <article class="mirror-card" data-type="interior">
+            <div class="card-visual"><div class="mini-mirror interior"></div></div>
+            <div class="card-body">
+              <span class="tag">ИНТЕРЬЕР</span>
+              <h3>Простые</h3>
+              <p>Зеркала для интерьера без подсветки. Размер и комплектация уточняются.</p>
+              <div class="card-price">По запросу</div>
+              <button class="card-button choose-btn" data-type="interiorSimple" data-name="Интерьерное зеркало — простое">Выбрать</button>
+            </div>
+          </article>
+
+          <article class="mirror-card" data-type="interior">
+            <div class="card-visual"><div class="mini-mirror illuminated"><span>LED</span></div></div>
+            <div class="card-body">
+              <span class="tag">ИНТЕРЬЕР · ПОДСВЕТКА</span>
+              <h3>С подсветкой</h3>
+              <p>Интерьерные зеркала с подсветкой. Конкретная конфигурация будет добавлена после уточнения.</p>
+              <div class="card-price">По запросу</div>
+              <button class="card-button choose-btn" data-type="interiorLight" data-name="Интерьерное зеркало — с подсветкой">Выбрать</button>
+            </div>
+          </article>
+
+          <article class="mirror-card" data-type="interior custom">
             <div class="card-visual"><div class="mini-mirror custom"></div><span class="dimension-label">ВАШ РАЗМЕР</span></div>
             <div class="card-body">
-              <span class="tag">НЕСТАНДАРТ</span>
-              <h3>По вашим размерам</h3>
-              <p>Укажите ширину и высоту — сайт покажет пропорциональный предпросмотр.</p>
-              <button class="card-button choose-btn" data-type="custom" data-name="Нестандартное зеркало">Настроить</button>
+              <span class="tag">ИНТЕРЬЕР · НЕСТАНДАРТ</span>
+              <h3>Нестандартные</h3>
+              <p>Зеркало для интерьера по индивидуальным размерам.</p>
+              <div class="card-price">По запросу</div>
+              <button class="card-button choose-btn" data-type="interiorCustom" data-name="Интерьерное зеркало — нестандарт">Настроить</button>
+            </div>
+          </article>
+
+          <article class="mirror-card" data-type="cabinet">
+            <div class="card-visual"><div class="mini-mirror cabinet"></div></div>
+            <div class="card-body">
+              <span class="tag">ШКАФЫ И ПОЛКИ</span>
+              <h3>Зеркала на шкафы</h3>
+              <p>Изготовление зеркал для шкафов. Размер и тип крепления уточняются.</p>
+              <div class="card-price">По запросу</div>
+              <button class="card-button choose-btn" data-type="cabinet" data-name="Зеркало на шкаф">Выбрать</button>
+            </div>
+          </article>
+
+          <article class="mirror-card" data-type="cabinet">
+            <div class="card-visual"><div class="mini-mirror shelf"></div></div>
+            <div class="card-body">
+              <span class="tag">ШКАФЫ И ПОЛКИ</span>
+              <h3>Зеркала на полки</h3>
+              <p>Зеркала для полок и мебельных элементов по согласованным размерам.</p>
+              <div class="card-price">По запросу</div>
+              <button class="card-button choose-btn" data-type="shelf" data-name="Зеркало на полку">Выбрать</button>
             </div>
           </article>
         </div>
@@ -97,7 +158,7 @@
         <div class="section-heading">
           <div>
             <p class="eyebrow">КОНФИГУРАТОР</p>
-            <h2 id="selectedTitle">Титульное</h2>
+            <h2 id="selectedTitle">Стандарт с глазком</h2>
           </div>
           <button class="text-button" id="resetConfig">Сбросить</button>
         </div>
@@ -109,30 +170,28 @@
               <div class="preview-ruler ruler-side"><span>высота</span></div>
               <div class="big-mirror" id="bigMirror"><span>ПРЕДПРОСМОТР<br>ЗЕРКАЛА</span></div>
             </div>
-            <p class="preview-caption">Предпросмотр условный и показывает пропорции зеркала.</p>
+            <p class="preview-caption" id="previewCaption">Предпросмотр условный и показывает пропорции зеркала.</p>
           </div>
 
           <div class="settings-panel">
-            <label class="field-label">Набор</label>
+            <label class="field-label">Категория</label>
             <div class="segmented" id="setSelector">
-              <button data-type="standard" class="selected">Стандарт</button>
-              <button data-type="standardPlus">Стандарт+</button>
+              <button data-type="doorStandard" class="selected">Дверь · Стандарт</button>
+              <button data-type="doorStandardPlus">Дверь · Стандарт+</button>
               <button data-type="custom">Нестандарт</button>
             </div>
 
             <div class="dimension-grid" id="dimensions">
-              <label class="field"><span>Ширина</span><div><input id="widthInput" type="number" min="100" max="5000" value="600" inputmode="numeric"><b>мм</b></div></label>
-              <label class="field"><span>Высота</span><div><input id="heightInput" type="number" min="100" max="5000" value="900" inputmode="numeric"><b>мм</b></div></label>
+              <label class="field"><span>Ширина</span><div><input id="widthInput" type="number" min="100" max="5000" value="1600" inputmode="numeric"><b>мм</b></div></label>
+              <label class="field"><span>Высота</span><div><input id="heightInput" type="number" min="100" max="5000" value="630" inputmode="numeric"><b>мм</b></div></label>
             </div>
-            <p class="field-help" id="dimensionHelp">Для стандартных наборов размеры будут уточнены владельцем.</p>
+            <p class="field-help" id="dimensionHelp">Стандарт для входной двери: 160 × 63 см.</p>
 
             <div class="price-box">
-              <div><span>Зеркало</span><strong id="mirrorPrice">Уточняется</strong></div>
-              <div><span>Доставка по Москве</span><strong id="deliveryPrice">Уточняется</strong></div>
-              <div><span>Установка</span><strong id="installPrice">Уточняется</strong></div>
-              <div class="total"><span>Предварительно</span><strong id="totalPrice">Уточняется</strong></div>
+              <div><span>Комплект под ключ</span><strong id="mirrorPrice">8 000 ₽</strong></div>
+              <div class="total"><span>ИТОГО</span><strong id="totalPrice">8 000 ₽</strong></div>
             </div>
-            <p class="price-note">Финальная стоимость будет подтверждена после согласования заказа.</p>
+            <p class="price-note">Для стандартных комплектов стоимость указана за всё, под ключ. Для остальных вариантов цена будет добавлена после уточнения.</p>
             <button class="button primary full" id="startOrder">Перейти к оформлению</button>
           </div>
         </div>
@@ -155,8 +214,8 @@
             <label class="field wide"><span>Комментарий</span><textarea id="comment" name="comment" rows="3" placeholder="Например: удобное время для звонка"></textarea></label>
           </div>
           <div class="form-summary">
-            <div><span>Ваш заказ</span><strong id="formOrderName">Титульное · Стандарт</strong></div>
-            <div><span>Стоимость</span><strong id="formOrderPrice">Уточняется</strong></div>
+            <div><span>Ваш заказ</span><strong id="formOrderName">Зеркало на входную дверь — Стандарт с глазком · 160 × 63 см</strong></div>
+            <div><span>Стоимость</span><strong id="formOrderPrice">8 000 ₽</strong></div>
           </div>
           <label class="consent"><input type="checkbox" id="consent" required><span>Я согласен(на) на обработку указанных данных для связи по заказу.</span></label>
           <button class="button primary" type="submit">Оформить заказ</button>
@@ -166,11 +225,11 @@
 
       <section id="receipt" class="section receipt-section hidden">
         <div class="receipt-card" id="receiptCard">
-          <div class="receipt-head"><span>ЗЕРКАЛА.МОСКВА</span><span id="receiptNumber">ЗАКАЗ №000001</span></div>
+          <div class="receipt-head"><span>ЗАЗЕРКАЛЬЕ</span><span id="receiptNumber">ЗАКАЗ №000001</span></div>
           <div class="receipt-title">Мини-чек заказа</div>
           <div class="receipt-warning">ОБЯЗАТЕЛЬНО СОХРАНИТЕ ЭТОТ ЧЕК!<small>Он может понадобиться при техническом сбое системы.</small></div>
           <div class="receipt-lines" id="receiptContent"></div>
-          <div class="receipt-total"><span>ПРЕДВАРИТЕЛЬНО</span><strong id="receiptTotal">Уточняется</strong></div>
+          <div class="receipt-total"><span>ИТОГО</span><strong id="receiptTotal">8 000 ₽</strong></div>
           <div class="receipt-actions"><button class="button primary" id="printReceipt">Печать / PDF</button><button class="button secondary" id="backToCatalog">Вернуться к каталогу</button></div>
         </div>
       </section>
@@ -178,22 +237,23 @@
       <section id="faq" class="section faq-section">
         <div class="section-heading"><div><p class="eyebrow">ПОМОЩЬ</p><h2>Частые вопросы</h2></div></div>
         <div class="faq-list">
-          <details><summary>Можно ли заказать зеркало нестандартного размера?</summary><p>Да. На этапе настройки можно будет указать ширину и высоту. Допустимые пределы и формулу расчёта добавим после согласования с владельцем.</p></details>
-          <details><summary>Работаете ли вы за пределами Москвы?</summary><p>Нет. Сайт предназначен только для заказов внутри Москвы, без Московской области.</p></details>
-          <details><summary>Что входит в стоимость?</summary><p>На текущем этапе это настраиваемые позиции: зеркало, доставка по Москве и установка. Точные правила и цены будут определены владельцем.</p></details>
+          <details><summary>Работаете ли вы за пределами Москвы?</summary><p>Нет. Заказы принимаются только в пределах города Москвы. Московская область в зону заказов не входит.</p></details>
+          <details><summary>Что значит «под ключ»?</summary><p>Для стандартных комплектов на входную дверь указанная стоимость — за всё, под ключ. Точные состав и условия каждого другого варианта будут добавлены после согласования.</p></details>
+          <details><summary>Какие размеры есть у зеркал на входную дверь?</summary><p>Сейчас подтверждены два стандартных размера: 160 × 63 см и 180 × 63 см. Размер нестандартного варианта уточняется.</p></details>
+          <details><summary>Можно ли заказать нестандартный размер?</summary><p>Да. Можно оставить заявку, а точные допустимые размеры и стоимость будут рассчитаны после уточнения условий.</p></details>
           <details><summary>Что будет после оформления?</summary><p>В финальной версии заказ получит уникальный номер, клиент увидит мини-чек, а владельцу автоматически придёт структурированный отчёт в MAX.</p></details>
         </div>
       </section>
 
       <section id="about" class="section about-section">
-        <p class="eyebrow">О ПРОЕКТЕ</p>
-        <h2>Зеркала для Москвы</h2>
-        <p>Сайт создаётся как удобный каталог и инструмент оформления заказов: от выбора комплекта до автоматической передачи информации владельцу.</p>
+        <p class="eyebrow">ЗАЗЕРКАЛЬЕ</p>
+        <h2>Зеркала в Москве</h2>
+        <p>Сайт создаётся как удобный каталог и инструмент оформления заказов: от выбора зеркала до автоматической передачи информации владельцу. Работаем только по Москве.</p>
       </section>
     </main>
   </div>
 
-  <footer class="footer"><span>© 2026 ЗЕРКАЛА.МОСКВА</span><span>Только Москва</span></footer>
+  <footer class="footer"><span>© 2026 ЗАЗЕРКАЛЬЕ</span><span>Только Москва · не Московская область</span></footer>
   <script src="js/app.js"></script>
 </body>
 </html>
