@@ -85,10 +85,18 @@ function setType(type, name) {
   $('#heightInput').readOnly = !isCustom;
   $('#dimensionHelp').textContent = isCustom
     ? 'Укажите размеры в миллиметрах. Точные допустимые пределы и стоимость нестандартного варианта уточняются у владельца.'
-    : `Подтверждённый размер: ${state.width / 10} × ${state.height / 10} см. Стоимость указана под ключ.`;
+    : `Подтверждённый размер: ${state.width} × ${state.height} мм. Стоимость указана под ключ.`;
 
   updatePreview();
   updatePrices();
+}
+
+function updateStaticDimensions() {
+  $$('.mirror-card p, #formOrderName').forEach(el => {
+    el.textContent = el.textContent
+      .replace('160 × 63 см', '1600 × 630 мм')
+      .replace('180 × 63 см', '1800 × 630 мм');
+  });
 }
 
 $$('.choose-btn').forEach(btn => {
@@ -134,7 +142,7 @@ function validMoscowAddress(value) {
 function buildReceipt(data) {
   const receipt = $('#receiptContent');
   const product = products[state.type] || products.custom;
-  const dimensions = `${state.width / 10} × ${state.height / 10} см`;
+  const dimensions = `${state.width} × ${state.height} мм`;
   receipt.innerHTML = `
     <div class="receipt-row"><span>Зеркало</span><strong>${escapeHtml(state.name)}</strong></div>
     <div class="receipt-row"><span>Категория</span><strong>${typeLabel(state.type)}</strong></div>
@@ -181,5 +189,6 @@ $('#printReceipt').addEventListener('click', () => window.print());
 $('#backToCatalog').addEventListener('click', () => document.querySelector('#mirrors').scrollIntoView({ behavior: 'smooth' }));
 
 window.addEventListener('resize', updatePreview);
+updateStaticDimensions();
 updatePreview();
 updatePrices();
