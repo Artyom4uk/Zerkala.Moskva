@@ -1,29 +1,52 @@
 const state = {
-  type: 'standard',
-  name: 'Титульное',
-  width: 600,
-  height: 900,
-  orderNumber: 1,
-  prices: { standard: null, standardPlus: null, customPerM2: null, delivery: null, installation: null }
+  type: 'doorStandard',
+  name: 'Зеркало на входную дверь — Стандарт с глазком',
+  width: 1600,
+  height: 630,
+  orderNumber: Number(localStorage.getItem('zerkalyeOrderNumber') || '1'),
+  price: 8000
 };
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 
+const products = {
+  doorStandard: { label: 'Стандарт с глазком', width: 1600, height: 630, price: 8000, turnkey: true },
+  doorStandardPlus: { label: 'Стандарт+ с глазком', width: 1800, height: 630, price: 9000, turnkey: true },
+  doorCustom: { label: 'Нестандарт', width: 2000, height: 630, price: null, custom: true },
+  interiorSimple: { label: 'Простое интерьерное', width: 1000, height: 1800, price: null, custom: true },
+  interiorLight: { label: 'Интерьерное с подсветкой', width: 1000, height: 1800, price: null, custom: true },
+  interiorCustom: { label: 'Интерьерное нестандартное', width: 1000, height: 1800, price: null, custom: true },
+  cabinet: { label: 'На шкаф', width: 600, height: 1800, price: null, custom: true },
+  shelf: { label: 'На полку', width: 600, height: 400, price: null, custom: true },
+  custom: { label: 'Нестандарт', width: 1000, height: 1000, price: null, custom: true }
+};
+
 function formatPrice(value) {
-  if (value === null || value === undefined) return 'Уточняется';
+  if (value === null || value === undefined) return 'По запросу';
   return new Intl.NumberFormat('ru-RU').format(value) + ' ₽';
 }
 
 function typeLabel(type) {
-  return type === 'standardPlus' ? 'Стандарт+' : type === 'custom' ? 'Нестандарт' : 'Стандарт';
+  if (type === 'doorStandard') return 'Входная дверь · Стандарт';
+  if (type === 'doorStandardPlus') return 'Входная дверь · Стандарт+';
+  if (type === 'doorCustom') return 'Входная дверь · Нестандарт';
+  if (type === 'interiorSimple') return 'Интерьер · Простое';
+  if (type === 'interiorLight') return 'Интерьер · С подсветкой';
+  if (type === 'interiorCustom') return 'Интерьер · Нестандарт';
+  if (type === 'cabinet') return 'Шкафы';
+  if (type === 'shelf') return 'Полки';
+  return 'Нестандарт';
+}
+
+function dimensionsLabel() {
+  return `${state.width} × ${state.height} мм`;
 }
 
 function updatePreview() {
   const mirror = $('#bigMirror');
-  const minW = 180, maxW = 5000, minH = 180, maxH = 5000;
-  const width = Math.max(minW, Math.min(maxW, Number(state.width) || 600));
-  const height = Math.max(minH, Math.min(maxH, Number(state.height) || 900));
+  const width = Math.max(100, Math.min(5000, Number(state.width) || 1000));
+  const height = Math.max(100, Math.min(5000, Number(state.height) || 1000));
   const ratio = width / height;
   const maxWidth = window.innerWidth <= 760 ? 230 : 290;
   const maxHeight = window.innerWidth <= 760 ? 310 : 410;
@@ -31,36 +54,39 @@ function updatePreview() {
   let visualH = visualW / ratio;
   if (visualH > maxHeight) { visualH = maxHeight; visualW = visualH * ratio; }
   if (visualW > maxWidth) { visualW = maxWidth; visualH = visualW / ratio; }
-  mirror.style.width = `${Math.max(120, visualW)}px`;
-  mirror.style.height = `${Math.max(160, visualH)}px`;
+  mirror.style.width = `${Math.max(100, visualW)}px`;
+  mirror.style.height = `${Math.max(120, visualH)}px`;
   $('#selectedTitle').textContent = state.name;
-  $('#formOrderName').textContent = `${state.name} · ${typeLabel(state.type)}`;
+  $('#formOrderName').textContent = `${state.name} · ${dimensionsLabel()}`;
+  $('#previewCaption').textContent = `Предпросмотр: ${dimensionsLabel()}. Пропорции условные.`;
 }
 
 function updatePrices() {
-  let mirrorPrice = null;
-  if (state.type === 'standard') mirrorPrice = state.prices.standard;
-  if (state.type === 'standardPlus') mirrorPrice = state.prices.standardPlus;
-  if (state.type === 'custom' && state.prices.customPerM2 !== null) {
-    mirrorPrice = (state.width * state.height / 1000000) * state.prices.customPerM2;
-  }
-  $('#mirrorPrice').textContent = formatPrice(mirrorPrice);
-  $('#deliveryPrice').textContent = formatPrice(state.prices.delivery);
-  $('#installPrice').textContent = formatPrice(state.prices.installation);
-  const total = [mirrorPrice, state.prices.delivery, state.prices.installation];
-  $('#totalPrice').textContent = total.every(v => typeof v === 'number') ? formatPrice(total.reduce((a,b) => a+b, 0)) : 'Уточняется';
-  $('#formOrderPrice').textContent = $('#totalPrice').textContent;
+  $('#mirrorPrice').textContent = formatPrice(state.price);
+  $('#totalPrice').textContent = formatPrice(state.price);
+  $('#formOrderPrice').textContent = formatPrice(state.price);
 }
 
 function setType(type, name) {
+  const product = products[type] || products.custom;
   state.type = type;
-  if (name) state.name = name;
+  state.name = name || state.name;
+  state.width = product.width;
+  state.height = product.height;
+  state.price = product.price;
+
   $$('#setSelector button').forEach(btn => btn.classList.toggle('selected', btn.dataset.type === type));
-  const custom = type === 'custom';
-  $('#dimensions').style.opacity = custom ? '1' : '.72';
-  $('#dimensionHelp').textContent = custom
-    ? 'Введите реальные размеры в миллиметрах. Допустимые пределы подтвердит владелец.'
-    : 'Для стандартных наборов размеры и состав будут уточнены владельцем.';
+
+  const isCustom = product.custom || type === 'custom';
+  $('#dimensions').style.opacity = '1';
+  $('#widthInput').value = state.width;
+  $('#heightInput').value = state.height;
+  $('#widthInput').readOnly = !isCustom;
+  $('#heightInput').readOnly = !isCustom;
+  $('#dimensionHelp').textContent = isCustom
+    ? 'Укажите размеры в миллиметрах. Точные допустимые пределы и стоимость нестандартного варианта уточняются у владельца.'
+    : `Подтверждённый размер: ${state.width / 10} × ${state.height / 10} см. Стоимость указана под ключ.`;
+
   updatePreview();
   updatePrices();
 }
@@ -80,20 +106,18 @@ $$('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const filter = btn.dataset.filter;
     $$('.mirror-card').forEach(card => {
-      card.style.display = card.dataset.type === filter ? '' : 'none';
+      const types = card.dataset.type.split(' ');
+      card.style.display = types.includes(filter) ? '' : 'none';
     });
     document.querySelector('#mirrors').scrollIntoView({ behavior: 'smooth' });
   });
 });
 
-$('#widthInput').addEventListener('input', e => { state.width = Number(e.target.value); updatePreview(); updatePrices(); });
-$('#heightInput').addEventListener('input', e => { state.height = Number(e.target.value); updatePreview(); updatePrices(); });
+$('#widthInput').addEventListener('input', e => { if (!e.target.readOnly) { state.width = Number(e.target.value); updatePreview(); updatePrices(); } });
+$('#heightInput').addEventListener('input', e => { if (!e.target.readOnly) { state.height = Number(e.target.value); updatePreview(); updatePrices(); } });
 
 $('#resetConfig').addEventListener('click', () => {
-  $('#widthInput').value = 600;
-  $('#heightInput').value = 900;
-  state.width = 600; state.height = 900; state.name = 'Титульное';
-  setType('standard', 'Титульное');
+  setType('doorStandard', 'Зеркало на входную дверь — Стандарт с глазком');
 });
 
 $('#startOrder').addEventListener('click', () => {
@@ -102,26 +126,26 @@ $('#startOrder').addEventListener('click', () => {
 });
 
 function validMoscowAddress(value) {
-  const normalized = value.toLowerCase().trim();
-  // We intentionally do not try to geocode addresses in the frontend.
-  // Final Moscow-only verification belongs to the backend/order manager.
-  const regionWords = ['область', 'московская обл', 'мо,', 'московская область'];
+  const normalized = value.toLowerCase().replace(/ё/g, 'е').trim();
+  const regionWords = ['московская область', 'московская обл', 'мо,', 'область,', 'г. химки', 'химки,', 'мытищи', 'красногорск', 'одинцово', 'балашиха', 'подольск', 'люберцы', 'королев', 'домодедово', 'видное', 'реутов'];
   return !regionWords.some(word => normalized.includes(word));
 }
 
 function buildReceipt(data) {
   const receipt = $('#receiptContent');
-  const dimensions = state.type === 'custom' ? `Ширина: ${state.width} мм · Высота: ${state.height} мм` : 'Размер: стандартный набор';
+  const product = products[state.type] || products.custom;
+  const dimensions = `${state.width / 10} × ${state.height / 10} см`;
   receipt.innerHTML = `
     <div class="receipt-row"><span>Зеркало</span><strong>${escapeHtml(state.name)}</strong></div>
-    <div class="receipt-row"><span>Набор</span><strong>${typeLabel(state.type)}</strong></div>
+    <div class="receipt-row"><span>Категория</span><strong>${typeLabel(state.type)}</strong></div>
     <div class="receipt-row"><span>Размер</span><strong>${dimensions}</strong></div>
+    <div class="receipt-row"><span>Комплектация</span><strong>${product.turnkey ? 'Под ключ' : 'Уточняется'}</strong></div>
     <div class="receipt-row"><span>Фамилия и имя</span><strong>${escapeHtml(data.surname)} ${escapeHtml(data.firstName)}</strong></div>
     <div class="receipt-row"><span>Телефон</span><strong>${escapeHtml(data.phone)}</strong></div>
     <div class="receipt-row"><span>Адрес</span><strong>${escapeHtml(data.address)}</strong></div>
     ${data.comment ? `<div class="receipt-row"><span>Комментарий</span><strong>${escapeHtml(data.comment)}</strong></div>` : ''}
   `;
-  $('#receiptTotal').textContent = $('#totalPrice').textContent;
+  $('#receiptTotal').textContent = formatPrice(state.price);
   $('#receiptNumber').textContent = `ЗАКАЗ №${String(state.orderNumber).padStart(6, '0')}`;
 }
 
@@ -143,13 +167,14 @@ $('#orderForm').addEventListener('submit', e => {
     return;
   }
   if (!validMoscowAddress(data.address)) {
-    alert('Сейчас мы принимаем заказы только по Москве, без Московской области. Проверьте адрес.');
+    alert('Заказы принимаются только по Москве, без Московской области. Проверьте адрес.');
     return;
   }
   buildReceipt(data);
   $('#receipt').classList.remove('hidden');
   $('#receipt').scrollIntoView({ behavior: 'smooth', block: 'start' });
   state.orderNumber += 1;
+  localStorage.setItem('zerkalyeOrderNumber', String(state.orderNumber));
 });
 
 $('#printReceipt').addEventListener('click', () => window.print());
