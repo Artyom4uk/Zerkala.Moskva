@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Заказ зеркал в Москве — стандартные, стандарт+ и нестандартные размеры.">
+  <title>Зеркала — Москва</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Зеркала — Москва">
+      <span class="brand-mark">◇</span>
+      <span>ЗЕРКАЛА<span class="brand-dot">.</span>МОСКВА</span>
+    </a>
+    <nav class="topnav" aria-label="Основная навигация">
+      <a href="#home">Главная</a>
+      <a href="#mirrors">Зеркала</a>
+      <a href="#faq">Частые вопросы</a>
+      <a href="#order">Заказать лично</a>
+    </nav>
+    <a class="top-order" href="#order">Заказать</a>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="side-title">Каталог</div>
+      <a class="side-link active" href="#mirrors">Все зеркала</a>
+      <button class="side-link filter-btn" data-filter="standard">Стандарт</button>
+      <button class="side-link filter-btn" data-filter="standardPlus">Стандарт+</button>
+      <button class="side-link filter-btn" data-filter="custom">Нестандартные размеры</button>
+      <a class="side-link" href="#order">Хочу заказать лично</a>
+      <div class="side-spacer"></div>
+      <a class="side-link" href="#faq">Помощь</a>
+      <a class="side-link" href="#about">О нас</a>
+      <div class="moscow-note">Только Москва.<br>Заказы за пределами Москвы<br>не принимаются.</div>
+    </aside>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">ЗЕРКАЛА НА ЗАКАЗ</p>
+          <h1>Зеркало,<br><em>которое подходит именно вам.</em></h1>
+          <p class="hero-text">Выберите готовый набор или укажите свои размеры. Предварительная стоимость рассчитывается до оформления заказа.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#mirrors">Выбрать зеркало</a>
+            <a class="button secondary" href="#order">Заказать лично</a>
+          </div>
+        </div>
+        <div class="hero-mirror" aria-hidden="true">
+          <div class="mirror-glow"></div>
+          <div class="mirror-shape"><span>ПРЕДПРОСМОТР<br>ЗЕРКАЛА</span></div>
+        </div>
+      </section>
+
+      <section id="mirrors" class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">КАТАЛОГ</p>
+            <h2>Выберите вариант</h2>
+          </div>
+          <p class="section-muted">Стоимость пока демонстрационная.<br>Точные цены внесём после согласования с владельцем.</p>
+        </div>
+
+        <div class="cards" id="mirrorCards">
+          <article class="mirror-card" data-type="standard">
+            <div class="card-visual"><div class="mini-mirror tall"></div></div>
+            <div class="card-body">
+              <span class="tag">СТАНДАРТ</span>
+              <h3>Титульное</h3>
+              <p>Готовый стандартный комплект. Размер и состав набора уточняются.</p>
+              <button class="card-button choose-btn" data-type="standard" data-name="Титульное">Выбрать</button>
+            </div>
+          </article>
+          <article class="mirror-card" data-type="standardPlus">
+            <div class="card-visual"><div class="mini-mirror wide"></div></div>
+            <div class="card-body">
+              <span class="tag">СТАНДАРТ+</span>
+              <h3>Титульное Plus</h3>
+              <p>Расширенный стандартный комплект с дополнительными возможностями.</p>
+              <button class="card-button choose-btn" data-type="standardPlus" data-name="Титульное Plus">Выбрать</button>
+            </div>
+          </article>
+          <article class="mirror-card custom-card" data-type="custom">
+            <div class="card-visual"><div class="mini-mirror custom"></div><span class="dimension-label">ВАШ РАЗМЕР</span></div>
+            <div class="card-body">
+              <span class="tag">НЕСТАНДАРТ</span>
+              <h3>По вашим размерам</h3>
+              <p>Укажите ширину и высоту — сайт покажет пропорциональный предпросмотр.</p>
+              <button class="card-button choose-btn" data-type="custom" data-name="Нестандартное зеркало">Настроить</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="configurator" class="section configurator-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">КОНФИГУРАТОР</p>
+            <h2 id="selectedTitle">Титульное</h2>
+          </div>
+          <button class="text-button" id="resetConfig">Сбросить</button>
+        </div>
+
+        <div class="configurator">
+          <div class="preview-panel">
+            <div class="preview-stage">
+              <div class="preview-ruler ruler-top"><span>ширина</span></div>
+              <div class="preview-ruler ruler-side"><span>высота</span></div>
+              <div class="big-mirror" id="bigMirror"><span>ПРЕДПРОСМОТР<br>ЗЕРКАЛА</span></div>
+            </div>
+            <p class="preview-caption">Предпросмотр условный и показывает пропорции зеркала.</p>
+          </div>
+
+          <div class="settings-panel">
+            <label class="field-label">Набор</label>
+            <div class="segmented" id="setSelector">
+              <button data-type="standard" class="selected">Стандарт</button>
+              <button data-type="standardPlus">Стандарт+</button>
+              <button data-type="custom">Нестандарт</button>
+            </div>
+
+            <div class="dimension-grid" id="dimensions">
+              <label class="field"><span>Ширина</span><div><input id="widthInput" type="number" min="100" max="5000" value="600" inputmode="numeric"><b>мм</b></div></label>
+              <label class="field"><span>Высота</span><div><input id="heightInput" type="number" min="100" max="5000" value="900" inputmode="numeric"><b>мм</b></div></label>
+            </div>
+            <p class="field-help" id="dimensionHelp">Для стандартных наборов размеры будут уточнены владельцем.</p>
+
+            <div class="price-box">
+              <div><span>Зеркало</span><strong id="mirrorPrice">Уточняется</strong></div>
+              <div><span>Доставка по Москве</span><strong id="deliveryPrice">Уточняется</strong></div>
+              <div><span>Установка</span><strong id="installPrice">Уточняется</strong></div>
+              <div class="total"><span>Предварительно</span><strong id="totalPrice">Уточняется</strong></div>
+            </div>
+            <p class="price-note">Финальная стоимость будет подтверждена после согласования заказа.</p>
+            <button class="button primary full" id="startOrder">Перейти к оформлению</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="order" class="section order-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">ОФОРМЛЕНИЕ</p>
+            <h2>Оставьте данные для связи</h2>
+          </div>
+          <p class="section-muted">Заказы принимаются только по Москве.</p>
+        </div>
+        <form class="order-form" id="orderForm" novalidate>
+          <div class="form-grid">
+            <label class="field"><span>Фамилия *</span><input id="surname" name="surname" autocomplete="family-name" required placeholder="Иванов"></label>
+            <label class="field"><span>Имя *</span><input id="firstName" name="firstName" autocomplete="given-name" required placeholder="Иван"></label>
+            <label class="field"><span>Телефон *</span><input id="phone" name="phone" autocomplete="tel" required placeholder="+7 900 000-00-00"></label>
+            <label class="field wide"><span>Адрес в Москве *</span><input id="address" name="address" autocomplete="street-address" required placeholder="Улица, дом, квартира"></label>
+            <label class="field wide"><span>Комментарий</span><textarea id="comment" name="comment" rows="3" placeholder="Например: удобное время для звонка"></textarea></label>
+          </div>
+          <div class="form-summary">
+            <div><span>Ваш заказ</span><strong id="formOrderName">Титульное · Стандарт</strong></div>
+            <div><span>Стоимость</span><strong id="formOrderPrice">Уточняется</strong></div>
+          </div>
+          <label class="consent"><input type="checkbox" id="consent" required><span>Я согласен(на) на обработку указанных данных для связи по заказу.</span></label>
+          <button class="button primary" type="submit">Оформить заказ</button>
+          <p class="form-note">Сейчас это демонстрационный режим: данные никуда не отправляются. Подключение базы и MAX будет добавлено после согласования бизнес-правил.</p>
+        </form>
+      </section>
+
+      <section id="receipt" class="section receipt-section hidden">
+        <div class="receipt-card" id="receiptCard">
+          <div class="receipt-head"><span>ЗЕРКАЛА.МОСКВА</span><span id="receiptNumber">ЗАКАЗ №000001</span></div>
+          <div class="receipt-title">Мини-чек заказа</div>
+          <div class="receipt-warning">ОБЯЗАТЕЛЬНО СОХРАНИТЕ ЭТОТ ЧЕК!<small>Он может понадобиться при техническом сбое системы.</small></div>
+          <div class="receipt-lines" id="receiptContent"></div>
+          <div class="receipt-total"><span>ПРЕДВАРИТЕЛЬНО</span><strong id="receiptTotal">Уточняется</strong></div>
+          <div class="receipt-actions"><button class="button primary" id="printReceipt">Печать / PDF</button><button class="button secondary" id="backToCatalog">Вернуться к каталогу</button></div>
+        </div>
+      </section>
+
+      <section id="faq" class="section faq-section">
+        <div class="section-heading"><div><p class="eyebrow">ПОМОЩЬ</p><h2>Частые вопросы</h2></div></div>
+        <div class="faq-list">
+          <details><summary>Можно ли заказать зеркало нестандартного размера?</summary><p>Да. На этапе настройки можно будет указать ширину и высоту. Допустимые пределы и формулу расчёта добавим после согласования с владельцем.</p></details>
+          <details><summary>Работаете ли вы за пределами Москвы?</summary><p>Нет. Сайт предназначен только для заказов внутри Москвы, без Московской области.</p></details>
+          <details><summary>Что входит в стоимость?</summary><p>На текущем этапе это настраиваемые позиции: зеркало, доставка по Москве и установка. Точные правила и цены будут определены владельцем.</p></details>
+          <details><summary>Что будет после оформления?</summary><p>В финальной версии заказ получит уникальный номер, клиент увидит мини-чек, а владельцу автоматически придёт структурированный отчёт в MAX.</p></details>
+        </div>
+      </section>
+
+      <section id="about" class="section about-section">
+        <p class="eyebrow">О ПРОЕКТЕ</p>
+        <h2>Зеркала для Москвы</h2>
+        <p>Сайт создаётся как удобный каталог и инструмент оформления заказов: от выбора комплекта до автоматической передачи информации владельцу.</p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer"><span>© 2026 ЗЕРКАЛА.МОСКВА</span><span>Только Москва</span></footer>
+  <script src="js/app.js"></script>
+</body>
+</html>
