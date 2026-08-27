@@ -56,6 +56,7 @@ function updatePreview() {
   if (visualW > maxWidth) { visualW = maxWidth; visualH = visualW / ratio; }
   mirror.style.width = `${Math.max(100, visualW)}px`;
   mirror.style.height = `${Math.max(120, visualH)}px`;
+  mirror.style.borderRadius = '0';
   $('#selectedTitle').textContent = state.name;
   $('#formOrderName').textContent = `${state.name} · ${dimensionsLabel()}`;
   $('#previewCaption').textContent = `Предпросмотр: ${dimensionsLabel()}. Пропорции условные.`;
@@ -188,7 +189,23 @@ $('#orderForm').addEventListener('submit', e => {
 $('#printReceipt').addEventListener('click', () => window.print());
 $('#backToCatalog').addEventListener('click', () => document.querySelector('#mirrors').scrollIntoView({ behavior: 'smooth' }));
 
-window.addEventListener('resize', updatePreview);
+/* Force the product previews to remain rectangular even if an older cached CSS rule is loaded. */
+function forceRectangularMirrors() {
+  $$('.mirror-shape, .mini-mirror, .big-mirror').forEach(el => {
+    el.style.setProperty('border-radius', '0px', 'important');
+  });
+  const mark = $('.brand-mark');
+  if (mark) {
+    mark.textContent = '';
+    mark.style.transform = 'none';
+    mark.style.background = "url('assets/zazerkalie-logo.svg') center/contain no-repeat";
+    mark.style.width = '42px';
+    mark.style.height = '42px';
+  }
+}
+
+window.addEventListener('resize', () => { updatePreview(); forceRectangularMirrors(); });
 updateStaticDimensions();
 updatePreview();
 updatePrices();
+forceRectangularMirrors();
