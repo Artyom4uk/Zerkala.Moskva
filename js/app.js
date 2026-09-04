@@ -7,6 +7,8 @@ const state = {
   price: 8000
 };
 
+const API_URL = 'https://zerkala-api.artgusfake10042013.workers.dev';
+
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 
@@ -140,7 +142,7 @@ function validMoscowAddress(value) {
   return !regionWords.some(word => normalized.includes(word));
 }
 
-function buildReceipt(data) {
+function buildReceipt(data, orderNumber) {
   const receipt = $('#receiptContent');
   const product = products[state.type] || products.custom;
   const dimensions = `${state.width} × ${state.height} мм`;
@@ -155,15 +157,16 @@ function buildReceipt(data) {
     ${data.comment ? `<div class="receipt-row"><span>Комментарий</span><strong>${escapeHtml(data.comment)}</strong></div>` : ''}
   `;
   $('#receiptTotal').textContent = formatPrice(state.price);
-  $('#receiptNumber').textContent = `ЗАКАЗ №${String(state.orderNumber).padStart(6, '0')}`;
+  $('#receiptNumber').textContent = `ЗАКАЗ №${escapeHtml(orderNumber)}`;
 }
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>'"]/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#039;', '"':'&quot;' }[ch]));
 }
 
-$('#orderForm').addEventListener('submit', e => {
+$('#orderForm').addEventListener('submit', async e => {
   e.preventDefault();
+
   const data = {
     surname: $('#surname').value.trim(),
     firstName: $('#firstName').value.trim(),
@@ -171,19 +174,63 @@ $('#orderForm').addEventListener('submit', e => {
     address: $('#address').value.trim(),
     comment: $('#comment').value.trim()
   };
+
   if (!data.surname || !data.firstName || !data.phone || !data.address || !$('#consent').checked) {
     alert('Пожалуйста, заполните все обязательные поля и подтвердите согласие.');
     return;
   }
+
   if (!validMoscowAddress(data.address)) {
     alert('Заказы принимаются только по Москве, без Московской области. Проверьте адрес.');
     return;
   }
-  buildReceipt(data);
-  $('#receipt').classList.remove('hidden');
-  $('#receipt').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  state.orderNumber += 1;
-  localStorage.setItem('zerkalyeOrderNumber', String(state.orderNumber));
+
+  const submitButton = $('#orderForm button[type="submit"]');
+  const originalText = submitButton ? submitButton.textContent : '';
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = 'Оформляем заказ…';
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/api/orders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        surname: data.surname,
+        name: data.firstName,
+        phone: data.phone,
+        address: data.address,
+        comment: data.comment,
+        mirror: state.name,
+        category: typeLabel(state.type),
+        packageType: products[state.type]?.turnkey ? 'Под ключ' : 'Уточняется',
+        widthMm: state.width,
+        heightMm: state.height,
+        priceRub: state.price
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.error || 'Сервер не принял заказ');
+    }
+
+    buildReceipt(data, result.orderNumber);
+    $('#receipt').classList.remove('hidden');
+    $('#receipt').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (error) {
+    console.error(error);
+    alert('Не удалось оформить заказ. Проверьте интернет-соединение и попробуйте ещё раз.');
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = originalText;
+    }
+  }
 });
 
 $('#printReceipt').addEventListener('click', () => window.print());
